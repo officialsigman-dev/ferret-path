@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Compass, ShieldCheck, Hammer, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import ferretIcon from "@/assets/ferret-icon.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
