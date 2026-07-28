@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Compass, ShieldCheck, Hammer, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import ferretIcon from "@/assets/ferret-icon.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,9 +40,13 @@ type Field = "fullName" | "email" | "city" | "message";
 function Wordmark({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2 ${className}`}>
-      <span className="grid size-8 place-items-center rounded-xl bg-primary text-primary-foreground wordmark text-lg leading-none">
-        f
-      </span>
+      <img
+        src={ferretIcon.url}
+        alt="ferret logo"
+        width={40}
+        height={40}
+        className="size-9 rounded-xl sm:size-10"
+      />
       <span className="wordmark text-2xl">ferret</span>
     </span>
   );
@@ -287,7 +292,10 @@ function Index() {
 
       <footer className="border-t border-border px-5 py-10 sm:px-8">
         <div className="mx-auto flex max-w-5xl flex-col items-start gap-3">
-          <span className="wordmark text-xl text-muted-foreground">ferret</span>
+          <span className="inline-flex items-center gap-2">
+            <img src={ferretIcon.url} alt="ferret logo" width={28} height={28} className="size-7 rounded-lg" />
+            <span className="wordmark text-xl text-muted-foreground">ferret</span>
+          </span>
           <p className="text-sm text-muted-foreground">
             FERRET is currently in development in Manitoba, Canada.
           </p>
