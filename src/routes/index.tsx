@@ -292,7 +292,10 @@ function Index() {
 
       <footer className="border-t border-border px-5 py-10 sm:px-8">
         <div className="mx-auto flex max-w-5xl flex-col items-start gap-3">
-          <span className="wordmark text-xl text-muted-foreground">ferret</span>
+          <span className="inline-flex items-center gap-2">
+            <img src={ferretIcon.url} alt="ferret logo" width={28} height={28} className="size-7 rounded-lg" />
+            <span className="wordmark text-xl text-muted-foreground">ferret</span>
+          </span>
           <p className="text-sm text-muted-foreground">
             FERRET is currently in development in Manitoba, Canada.
           </p>
