@@ -101,7 +101,11 @@ function Index() {
     });
     setSubmitting(false);
     if (error) {
-      setFormError("Something went wrong saving your spot. Please try again.");
+      setFormError(
+        error.code === "23505"
+          ? "That email is already on the waitlist — you're all set!"
+          : "Something went wrong saving your spot. Please try again.",
+      );
       return;
     }
     setSubmitted(true);
