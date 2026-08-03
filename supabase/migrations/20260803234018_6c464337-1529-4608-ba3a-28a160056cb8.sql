@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX IF NOT EXISTS signups_email_unique_idx ON public.signups (lower(btrim(email)));
