@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Compass, ShieldCheck, Hammer, Check } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { Compass, ShieldCheck, Hammer, Check, MailCheck } from "lucide-react";
+import { submitSignup } from "@/lib/signup.functions";
 import ferretIcon from "@/assets/ferret-icon.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -62,7 +63,9 @@ function Index() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [outcome, setOutcome] = useState<"sent" | "resent" | "already_confirmed">("sent");
   const [formError, setFormError] = useState<string | null>(null);
+  const submit = useServerFn(submitSignup);
 
   const errors = useMemo(() => {
     const e: Partial<Record<Field, string>> = {};
@@ -93,22 +96,22 @@ function Index() {
     if (!isValid || submitting) return;
     setSubmitting(true);
     setFormError(null);
-    const { error } = await supabase.from("signups").insert({
-      full_name: values.fullName.trim(),
-      email: values.email.trim().toLowerCase(),
-      city: values.city.trim(),
-      message: values.message.trim(),
-    });
-    setSubmitting(false);
-    if (error) {
-      setFormError(
-        error.code === "23505"
-          ? "That email is already on the waitlist — you're all set!"
-          : "Something went wrong saving your spot. Please try again.",
-      );
-      return;
+    try {
+      const result = await submit({
+        data: {
+          fullName: values.fullName.trim(),
+          email: values.email.trim().toLowerCase(),
+          city: values.city.trim(),
+          message: values.message.trim(),
+        },
+      });
+      setSubmitting(false);
+      setOutcome(result.status);
+      setSubmitted(true);
+    } catch {
+      setSubmitting(false);
+      setFormError("Something went wrong saving your spot. Please try again.");
     }
-    setSubmitted(true);
   }
 
   return (
@@ -191,10 +194,20 @@ function Index() {
             {submitted ? (
               <div className="py-10 text-center">
                 <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-primary text-primary-foreground">
-                  <Check className="size-7" strokeWidth={3} />
+                  {outcome === "already_confirmed" ? (
+                    <Check className="size-7" strokeWidth={3} />
+                  ) : (
+                    <MailCheck className="size-7" strokeWidth={2.5} />
+                  )}
                 </span>
-                <h2 className="mt-6 text-2xl">You're on the list</h2>
-                <p className="mt-2 text-muted-foreground">We'll be in touch.</p>
+                <h2 className="mt-6 text-2xl">
+                  {outcome === "already_confirmed" ? "You're already on the list" : "Check your email"}
+                </h2>
+                <p className="mt-2 text-muted-foreground">
+                  {outcome === "already_confirmed"
+                    ? "That email is confirmed and on the waitlist — we'll be in touch."
+                    : `We sent a confirmation link to ${values.email.trim().toLowerCase()}. Click it to secure your spot — only confirmed emails are counted.`}
+                </p>
               </div>
             ) : (
               <>

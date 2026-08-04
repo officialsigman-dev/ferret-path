@@ -71,6 +71,7 @@ function AdminPage() {
   }, [rows, search]);
 
   const newCount = rows.filter((r) => Date.now() - new Date(r.created_at).getTime() < DAY).length;
+  const confirmedCount = rows.filter((r) => r.confirmed_at).length;
 
   async function handleSignOut() {
     await queryClient.cancelQueries();
@@ -111,10 +112,14 @@ function AdminPage() {
 
         {isAdmin && (
           <>
-            <div className="mt-8 grid grid-cols-2 gap-3 sm:max-w-sm">
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:max-w-2xl sm:grid-cols-3">
               <div className="rounded-lg border border-border bg-card p-4">
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">Total</p>
                 <p className="mt-1 text-2xl font-bold text-foreground">{rows.length}</p>
+              </div>
+              <div className="rounded-lg border border-border bg-card p-4">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">Confirmed</p>
+                <p className="mt-1 text-2xl font-bold text-foreground">{confirmedCount}</p>
               </div>
               <div className="rounded-lg border border-border bg-card p-4">
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">New (24h)</p>
@@ -162,6 +167,15 @@ function AdminPage() {
                             </p>
                           </div>
                           <div className="flex items-center gap-2">
+                            <Badge
+                              className={
+                                row.confirmed_at
+                                  ? "bg-primary text-primary-foreground"
+                                  : "bg-muted text-muted-foreground"
+                              }
+                            >
+                              {row.confirmed_at ? "Confirmed" : "Unconfirmed"}
+                            </Badge>
                             <Badge className={status.className}>{status.label}</Badge>
                             <span className="text-xs text-muted-foreground">
                               {formatDate(row.created_at)}
