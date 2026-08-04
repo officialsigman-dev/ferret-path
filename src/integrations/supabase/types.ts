@@ -17,6 +17,9 @@ export type Database = {
       signups: {
         Row: {
           city: string
+          confirmation_sent_at: string | null
+          confirmation_token: string
+          confirmed_at: string | null
           created_at: string
           email: string
           full_name: string
@@ -25,6 +28,9 @@ export type Database = {
         }
         Insert: {
           city: string
+          confirmation_sent_at?: string | null
+          confirmation_token?: string
+          confirmed_at?: string | null
           created_at?: string
           email: string
           full_name: string
@@ -33,6 +39,9 @@ export type Database = {
         }
         Update: {
           city?: string
+          confirmation_sent_at?: string | null
+          confirmation_token?: string
+          confirmed_at?: string | null
           created_at?: string
           email?: string
           full_name?: string
