@@ -8,6 +8,7 @@ export type SignupRow = {
   city: string;
   message: string;
   created_at: string;
+  confirmed_at: string | null;
 };
 
 export const getAdminStatus = createServerFn({ method: "GET" })
@@ -29,7 +30,7 @@ export const listSignups = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("signups")
-      .select("id, full_name, email, city, message, created_at")
+      .select("id, full_name, email, city, message, created_at, confirmed_at")
       .order("created_at", { ascending: false })
       .limit(500);
 
