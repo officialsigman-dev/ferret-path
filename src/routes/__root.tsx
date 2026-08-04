@@ -77,21 +77,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ferret — apprenticeships for teens, 14–18" },
+      { title: "Ferret — Apprenticeships for Manitoba teens, 14–18" },
       {
         name: "description",
         content:
-          "ferret connects Manitoba teens aged 14–18 with local apprenticeships and skills-based opportunities.",
+          "Join the ferret waitlist: real apprenticeships and skills-based opportunities for Manitoba teens aged 14–18. Launching soon.",
       },
       { name: "author", content: "ferret" },
-      { property: "og:title", content: "ferret — apprenticeships for teens, 14–18" },
+      { property: "og:title", content: "Ferret — Apprenticeships for Manitoba teens, 14–18" },
       {
         property: "og:description",
         content:
-          "ferret connects Manitoba teens aged 14–18 with local apprenticeships and skills-based opportunities.",
+          "Join the ferret waitlist: real apprenticeships and skills-based opportunities for Manitoba teens aged 14–18. Launching soon.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Ferret — Apprenticeships for Manitoba teens, 14–18" },
+      { name: "twitter:description", content: "Join the ferret waitlist: real apprenticeships and skills-based opportunities for Manitoba teens aged 14–18. Launching soon." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/49744238-7b01-4383-b2b9-3e418f55d3bc/id-preview-1791ef05--71175cba-1cda-49c7-9eef-489a2095224e.lovable.app-1785814520753.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/49744238-7b01-4383-b2b9-3e418f55d3bc/id-preview-1791ef05--71175cba-1cda-49c7-9eef-489a2095224e.lovable.app-1785814520753.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

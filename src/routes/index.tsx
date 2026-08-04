@@ -8,17 +8,17 @@ import ferretIcon from "@/assets/ferret-icon.png.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ferret — apprenticeships for Manitoba teens, 14–18" },
+      { title: "Ferret — Apprenticeships for Manitoba teens, 14–18" },
       {
         name: "description",
         content:
           "Join the ferret waitlist: real apprenticeships and skills-based opportunities for Manitoba teens aged 14–18. Launching soon.",
       },
-      { property: "og:title", content: "ferret — apprenticeships for Manitoba teens, 14–18" },
+      { property: "og:title", content: "Ferret — Apprenticeships for Manitoba teens, 14–18" },
       {
         property: "og:description",
         content:
-          "Join the ferret waitlist: real apprenticeships and skills-based opportunities for Manitoba teens aged 14–18.",
+          "Join the ferret waitlist: real apprenticeships and skills-based opportunities for Manitoba teens aged 14–18. Launching soon.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
