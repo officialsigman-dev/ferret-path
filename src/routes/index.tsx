@@ -93,22 +93,22 @@ function Index() {
     if (!isValid || submitting) return;
     setSubmitting(true);
     setFormError(null);
-    const { error } = await supabase.from("signups").insert({
-      full_name: values.fullName.trim(),
-      email: values.email.trim().toLowerCase(),
-      city: values.city.trim(),
-      message: values.message.trim(),
-    });
-    setSubmitting(false);
-    if (error) {
-      setFormError(
-        error.code === "23505"
-          ? "That email is already on the waitlist — you're all set!"
-          : "Something went wrong saving your spot. Please try again.",
-      );
-      return;
+    try {
+      const result = await submit({
+        data: {
+          fullName: values.fullName.trim(),
+          email: values.email.trim().toLowerCase(),
+          city: values.city.trim(),
+          message: values.message.trim(),
+        },
+      });
+      setSubmitting(false);
+      setOutcome(result.status);
+      setSubmitted(true);
+    } catch {
+      setSubmitting(false);
+      setFormError("Something went wrong saving your spot. Please try again.");
     }
-    setSubmitted(true);
   }
 
   return (
