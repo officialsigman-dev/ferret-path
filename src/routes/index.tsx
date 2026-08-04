@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Compass, ShieldCheck, Hammer, Check } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { Compass, ShieldCheck, Hammer, Check, MailCheck } from "lucide-react";
+import { submitSignup } from "@/lib/signup.functions";
 import ferretIcon from "@/assets/ferret-icon.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -62,7 +63,9 @@ function Index() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [outcome, setOutcome] = useState<"sent" | "resent" | "already_confirmed">("sent");
   const [formError, setFormError] = useState<string | null>(null);
+  const submit = useServerFn(submitSignup);
 
   const errors = useMemo(() => {
     const e: Partial<Record<Field, string>> = {};
