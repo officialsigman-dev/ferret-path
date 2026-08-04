@@ -194,10 +194,20 @@ function Index() {
             {submitted ? (
               <div className="py-10 text-center">
                 <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-primary text-primary-foreground">
-                  <Check className="size-7" strokeWidth={3} />
+                  {outcome === "already_confirmed" ? (
+                    <Check className="size-7" strokeWidth={3} />
+                  ) : (
+                    <MailCheck className="size-7" strokeWidth={2.5} />
+                  )}
                 </span>
-                <h2 className="mt-6 text-2xl">You're on the list</h2>
-                <p className="mt-2 text-muted-foreground">We'll be in touch.</p>
+                <h2 className="mt-6 text-2xl">
+                  {outcome === "already_confirmed" ? "You're already on the list" : "Check your email"}
+                </h2>
+                <p className="mt-2 text-muted-foreground">
+                  {outcome === "already_confirmed"
+                    ? "That email is confirmed and on the waitlist — we'll be in touch."
+                    : `We sent a confirmation link to ${values.email.trim().toLowerCase()}. Click it to secure your spot — only confirmed emails are counted.`}
+                </p>
               </div>
             ) : (
               <>
