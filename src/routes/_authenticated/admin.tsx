@@ -167,6 +167,15 @@ function AdminPage() {
                             </p>
                           </div>
                           <div className="flex items-center gap-2">
+                            <Badge
+                              className={
+                                row.confirmed_at
+                                  ? "bg-primary text-primary-foreground"
+                                  : "bg-muted text-muted-foreground"
+                              }
+                            >
+                              {row.confirmed_at ? "Confirmed" : "Unconfirmed"}
+                            </Badge>
                             <Badge className={status.className}>{status.label}</Badge>
                             <span className="text-xs text-muted-foreground">
                               {formatDate(row.created_at)}
