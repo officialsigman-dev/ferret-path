@@ -300,6 +300,11 @@ function Index() {
                   >
                     {submitting ? "Saving your spot…" : "Join the waitlist"}
                   </button>
+
+                  <p className="flex items-start gap-2 text-xs text-muted-foreground">
+                    <ShieldCheck className="mt-0.5 size-4 shrink-0 text-primary" strokeWidth={2.2} />
+                    Your info is only used to confirm your email and send ferret updates. We never sell or share it.
+                  </p>
                 </form>
               </>
             )}
