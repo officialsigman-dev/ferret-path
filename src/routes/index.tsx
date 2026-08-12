@@ -319,10 +319,7 @@ function Index() {
             <span className="wordmark text-xl text-muted-foreground">ferret</span>
           </span>
           <p className="text-sm text-muted-foreground">
-            FERRET is currently in development in Manitoba, Canada.
-          </p>
-          <p className="text-sm text-muted-foreground">
-            A product of{" "}
+            FERRET™ is currently in development at{" "}
             <a
               href="https://traxform.co/"
               target="_blank"
