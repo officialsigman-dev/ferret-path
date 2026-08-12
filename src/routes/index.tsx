@@ -316,6 +316,18 @@ function Index() {
           <p className="text-sm text-muted-foreground">
             FERRET is currently in development in Manitoba, Canada.
           </p>
+          <p className="text-sm text-muted-foreground">
+            A product of{" "}
+            <a
+              href="https://traxform.co/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 transition-colors hover:text-foreground"
+            >
+              Traxform
+            </a>
+            , a Manitoba, Canada registered startup.
+          </p>
         </div>
       </footer>
     </div>
