@@ -319,7 +319,7 @@ function Index() {
             <span className="wordmark text-xl text-muted-foreground">ferret</span>
           </span>
           <p className="text-sm text-muted-foreground">
-            FERRET™ is currently in development at{" "}
+            ferret™ is currently in development at{" "}
             <a
               href="https://traxform.co/"
               target="_blank"
@@ -328,7 +328,7 @@ function Index() {
             >
               Traxform
             </a>
-            , a Manitoba, Canada registered startup.
+            , Winnipeg, Manitoba, Canada.
           </p>
         </div>
       </footer>
