@@ -84,6 +84,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Join the ferret waitlist: real apprenticeships and skills-based opportunities for Manitoba teens aged 14–18. Launching soon.",
       },
       { name: "author", content: "ferret" },
+      { name: "google-site-verification", content: "y7XElNpQvklwdnY84ddldR7UdgMiC9BHlBT3l7WK6Ck" },
       { property: "og:title", content: "Ferret — Apprenticeships for Manitoba teens, 14–18" },
       {
         property: "og:description",
