@@ -337,6 +337,12 @@ function Index() {
             </a>
             , Winnipeg, Manitoba, Canada.
           </p>
+          <Link
+            to="/privacy"
+            className="text-sm text-muted-foreground underline underline-offset-2 transition-colors hover:text-foreground"
+          >
+            Privacy Policy
+          </Link>
         </div>
       </footer>
     </div>
