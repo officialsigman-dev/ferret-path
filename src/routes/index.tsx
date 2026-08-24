@@ -21,8 +21,10 @@ export const Route = createFileRoute("/")({
           "Join the ferret waitlist: real apprenticeships and skills-based opportunities for Manitoba teens aged 14–18. Launching soon.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://ferret-pathways-connect.lovable.app/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://ferret-pathways-connect.lovable.app/" }],
   }),
   component: Index,
 });
