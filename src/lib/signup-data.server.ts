@@ -20,28 +20,6 @@ function createConfirmationToken(): string {
 
 export async function insertSignup(data: SignupInput): Promise<SignupResult> {
   const confirmationToken = createConfirmationToken();
-  const serviceRoleKey = process.env['SUPABASE_SERVICE_ROLE_KEY'];
-
-  if (serviceRoleKey) {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: row, error } = await supabaseAdmin
-      .from("signups")
-      .insert({
-        full_name: data.fullName,
-        email: data.email,
-        city: data.city,
-        message: data.message,
-        confirmation_token: confirmationToken,
-      })
-      .select("id")
-      .single();
-
-    if (!error && row) return { kind: "created", id: row.id, confirmationToken };
-    if (error?.code === "23505") return { kind: "duplicate" };
-    console.error("[signups] database insert failed", error?.code, error?.message);
-    return { kind: "error", message: error?.message ?? "Unknown database error" };
-  }
-
   const url = process.env['SUPABASE_URL'];
   const publishableKey = process.env['SUPABASE_PUBLISHABLE_KEY'];
   if (!url || !publishableKey) {
@@ -67,11 +45,5 @@ export async function insertSignup(data: SignupInput): Promise<SignupResult> {
 }
 
 export async function markConfirmationSent(id: string): Promise<void> {
-  if (!id || !process.env['SUPABASE_SERVICE_ROLE_KEY']) return;
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const { error } = await supabaseAdmin
-    .from("signups")
-    .update({ confirmation_sent_at: new Date().toISOString() })
-    .eq("id", id);
-  if (error) console.error("[signups] could not mark confirmation as sent", error.code, error.message);
+  if (!id) return;
 }
