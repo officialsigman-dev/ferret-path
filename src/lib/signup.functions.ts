@@ -1,69 +1,38 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-const submitSchema = z.object({
-  fullName: z.string().trim().min(1).max(100),
-  email: z.string().trim().email().max(255),
-  city: z.string().trim().min(1).max(100),
-  message: z.string().trim().min(1).max(1000),
-});
-
-const confirmSchema = z.object({
-  token: z.string().trim().min(16).max(128),
-});
-
 export const submitSignup = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => submitSchema.parse(data))
+  .inputValidator((data: unknown) => z.object({
+    fullName: z.string().trim().min(1).max(100),
+    email: z.string().trim().email().max(255),
+    city: z.string().trim().min(1).max(100),
+    message: z.string().trim().min(1).max(1000),
+  }).parse(data))
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { sendConfirmationEmail, confirmUrlFor } = await import("./signup-email.server");
+    const { insertSignup, markConfirmationSent } = await import("./signup-data.server");
 
     const email = data.email.toLowerCase();
-
-    const { data: row, error } = await supabaseAdmin
-      .from("signups")
-      .insert({
-        full_name: data.fullName,
-        email,
-        city: data.city,
-        message: data.message,
-      })
-      .select("id, confirmation_token, confirmed_at")
-      .single();
-
-    if (error) {
-      if (error.code === "23505") {
-        // Already on the list — resend the confirmation link if still unconfirmed.
-        const { data: existing } = await supabaseAdmin
-          .from("signups")
-          .select("id, confirmation_token, confirmed_at")
-          .eq("email", email)
-          .maybeSingle();
-
-        if (existing && !existing.confirmed_at) {
-          await sendConfirmationEmail(email, data.fullName, confirmUrlFor(existing.confirmation_token));
-          await supabaseAdmin
-            .from("signups")
-            .update({ confirmation_sent_at: new Date().toISOString() })
-            .eq("id", existing.id);
-          return { status: "resent" as const };
-        }
-        return { status: "already_confirmed" as const };
-      }
+    const result = await insertSignup({ ...data, email });
+    if (result.kind === "duplicate") return { status: "already_confirmed" as const };
+    if (result.kind === "error") {
       throw new Error("Could not save your signup.");
     }
 
-    await sendConfirmationEmail(email, data.fullName, confirmUrlFor(row.confirmation_token));
-    await supabaseAdmin
-      .from("signups")
-      .update({ confirmation_sent_at: new Date().toISOString() })
-      .eq("id", row.id);
+    const sent = await sendConfirmationEmail(
+      email,
+      data.fullName,
+      confirmUrlFor(result.confirmationToken),
+    );
+    if (sent) await markConfirmationSent(result.id);
 
     return { status: "sent" as const };
   });
 
 export const confirmSignup = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => confirmSchema.parse(data))
+  .inputValidator((data: unknown) => z.object({
+    token: z.string().trim().min(16).max(128),
+  }).parse(data))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
