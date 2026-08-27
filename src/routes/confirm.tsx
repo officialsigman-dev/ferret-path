@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Check, X, Loader2 } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { confirmSignup } from "@/lib/signup.functions";
-import ferretIcon from "@/assets/ferret-icon.png.asset.json";
+
 
 export const Route = createFileRoute("/confirm")({
   head: () => ({
@@ -53,7 +53,7 @@ function ConfirmPage() {
     <main className="grid min-h-screen place-items-center bg-background px-5 py-16">
       <div className="w-full max-w-md rounded-4xl border border-border bg-card p-8 text-center">
         <img
-          src={ferretIcon.url}
+          src="/ferret-icon.png"
           alt="ferret logo"
           width={48}
           height={48}

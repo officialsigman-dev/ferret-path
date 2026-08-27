@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { Compass, ShieldCheck, Hammer, Check, MailCheck } from "lucide-react";
 import { submitSignup } from "@/lib/signup.functions";
-import ferretIcon from "@/assets/ferret-icon.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,10 +21,10 @@ export const Route = createFileRoute("/")({
           "Join the ferret waitlist: real apprenticeships and skills-based opportunities for Manitoba teens aged 14–18. Launching soon.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://ferret-pathways-connect.lovable.app/" },
+      { property: "og:url", content: "https://ferret.traxform.co/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://ferret-pathways-connect.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://ferret.traxform.co/" }],
   }),
   component: Index,
 });
@@ -44,7 +44,7 @@ function Wordmark({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2 ${className}`}>
       <img
-        src={ferretIcon.url}
+        src="/ferret-icon.png"
         alt="ferret logo"
         width={56}
         height={56}
@@ -322,7 +322,7 @@ function Index() {
       <footer className="border-t border-border px-5 py-10 sm:px-8">
         <div className="mx-auto flex max-w-5xl flex-col items-start gap-3">
           <span className="inline-flex items-center gap-2">
-            <img src={ferretIcon.url} alt="ferret logo" width={40} height={40} className="size-10 rounded-lg" />
+            <img src="/ferret-icon.png" alt="ferret logo" width={40} height={40} className="size-10 rounded-lg" />
             <span className="wordmark text-xl text-muted-foreground">ferret</span>
           </span>
           <p className="text-sm text-muted-foreground">
