@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { Compass, ShieldCheck, Hammer, Check, MailCheck } from "lucide-react";
 import { submitSignup } from "@/lib/signup.functions";
-import ferretIcon from "@/assets/ferret-icon.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,10 +21,10 @@ export const Route = createFileRoute("/")({
           "Join the ferret waitlist: real apprenticeships and skills-based opportunities for Manitoba teens aged 14–18. Launching soon.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://ferret-pathways-connect.lovable.app/" },
+      { property: "og:url", content: "https://ferret.traxform.co/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://ferret-pathways-connect.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://ferret.traxform.co/" }],
   }),
   component: Index,
 });

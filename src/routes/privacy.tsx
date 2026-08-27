@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import ferretIcon from "@/assets/ferret-icon.png.asset.json";
+
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/privacy")({
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [{ rel: "canonical", href: "https://ferret-pathways-connect.lovable.app/privacy" }],
+    links: [{ rel: "canonical", href: "https://ferret.traxform.co/privacy" }],
   }),
   component: Privacy,
 });
