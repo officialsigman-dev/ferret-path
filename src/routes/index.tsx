@@ -44,7 +44,7 @@ function Wordmark({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2 ${className}`}>
       <img
-        src={ferretIcon.url}
+        src="/ferret-icon.png"
         alt="ferret logo"
         width={56}
         height={56}
@@ -322,7 +322,7 @@ function Index() {
       <footer className="border-t border-border px-5 py-10 sm:px-8">
         <div className="mx-auto flex max-w-5xl flex-col items-start gap-3">
           <span className="inline-flex items-center gap-2">
-            <img src={ferretIcon.url} alt="ferret logo" width={40} height={40} className="size-10 rounded-lg" />
+            <img src="/ferret-icon.png" alt="ferret logo" width={40} height={40} className="size-10 rounded-lg" />
             <span className="wordmark text-xl text-muted-foreground">ferret</span>
           </span>
           <p className="text-sm text-muted-foreground">
