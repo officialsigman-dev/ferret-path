@@ -1,4 +1,4 @@
-# FERRET | Teen Apprenticeships in Manitoba
+# FERRET | Teen Apprenticeships in Manitoba 
 
 Build a single-page landing site for FERRET, an apprenticeship marketplace 
 
