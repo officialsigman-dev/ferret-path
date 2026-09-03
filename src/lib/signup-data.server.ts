@@ -20,8 +20,11 @@ function createConfirmationToken(): string {
 
 export async function insertSignup(data: SignupInput): Promise<SignupResult> {
   const confirmationToken = createConfirmationToken();
-  const url = process.env['SUPABASE_URL'];
-  const publishableKey = process.env['SUPABASE_PUBLISHABLE_KEY'];
+  // process.env is populated in the Lovable sandbox; the published Worker relies
+  // on the build-time inlined VITE_* values, so fall back to those.
+  const url = process.env['SUPABASE_URL'] || import.meta.env.VITE_SUPABASE_URL;
+  const publishableKey =
+    process.env['SUPABASE_PUBLISHABLE_KEY'] || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
   if (!url || !publishableKey) {
     console.error("[signups] public database configuration is unavailable");
     return { kind: "error", message: "Database configuration is unavailable" };
@@ -29,7 +32,21 @@ export async function insertSignup(data: SignupInput): Promise<SignupResult> {
 
   const supabasePublic = createClient<Database>(url, publishableKey, {
     auth: { persistSession: false, autoRefreshToken: false },
+    global: {
+      fetch: (input, init) => {
+        const headers = new Headers(init?.headers);
+        if (
+          publishableKey.startsWith("sb_") &&
+          headers.get("Authorization") === `Bearer ${publishableKey}`
+        ) {
+          headers.delete("Authorization");
+        }
+        headers.set("apikey", publishableKey);
+        return fetch(input, { ...init, headers });
+      },
+    },
   });
+
   const { error } = await supabasePublic.from("signups").insert({
     full_name: data.fullName,
     email: data.email,
