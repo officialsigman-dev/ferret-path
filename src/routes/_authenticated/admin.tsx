@@ -137,6 +137,14 @@ function AdminPage() {
               <Button variant="outline" onClick={() => signupsQuery.refetch()}>
                 Refresh
               </Button>
+              <Button
+                variant="outline"
+                onClick={() => exportCsv(filtered)}
+                disabled={filtered.length === 0}
+              >
+                Export CSV
+              </Button>
+
             </div>
 
             {signupsQuery.isLoading && (
