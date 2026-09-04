@@ -40,6 +40,29 @@ function formatDate(value: string) {
   });
 }
 
+function csvCell(value: string | null) {
+  return `"${(value ?? "").replace(/"/g, '""')}"`;
+}
+
+function exportCsv(rows: SignupRow[]) {
+  const header = ["Full name", "Email", "City", "Message", "Confirmed at", "Created at"];
+  const lines = [
+    header.join(","),
+    ...rows.map((r) =>
+      [r.full_name, r.email, r.city, r.message, r.confirmed_at, r.created_at]
+        .map(csvCell)
+        .join(","),
+    ),
+  ];
+  const blob = new Blob(["\uFEFF" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `ferret-signups-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 function AdminPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
