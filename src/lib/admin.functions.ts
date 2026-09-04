@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireAuth } from "@/lib/auth-middleware.server";
 
 export type SignupRow = {
   id: string;
@@ -12,7 +12,7 @@ export type SignupRow = {
 };
 
 export const getAdminStatus = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAuth])
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("user_roles")
@@ -26,7 +26,7 @@ export const getAdminStatus = createServerFn({ method: "GET" })
   });
 
 export const listSignups = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAuth])
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("signups")
