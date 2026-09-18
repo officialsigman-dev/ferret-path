@@ -42,15 +42,15 @@ type Field = "fullName" | "email" | "city" | "message";
 
 function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <span className={`inline-flex items-center gap-2 ${className}`}>
+    <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <img
         src="/ferret-icon.png"
         alt="ferret logo"
-        width={56}
-        height={56}
-        className="size-12 rounded-xl sm:size-14"
+        width={68}
+        height={68}
+        className="size-17 rounded-xl sm:size-20"
       />
-      <span className="wordmark text-2xl">ferret</span>
+      <span className="wordmark text-3xl sm:text-4xl">ferret</span>
     </span>
   );
 }
