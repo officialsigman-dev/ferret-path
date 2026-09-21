@@ -136,7 +136,7 @@ function Index() {
               apprenticeships for teens, 14–18
             </p>
             <span className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold tracking-wide text-primary uppercase">
-              Launching Fall 2026
+              Launching Winter 2026
             </span>
           </div>
           <h1 className="mt-4 max-w-3xl text-[2.6rem] leading-[1.02] sm:text-6xl lg:text-7xl">
