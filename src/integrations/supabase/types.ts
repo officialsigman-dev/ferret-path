@@ -14,39 +14,135 @@ export type Database = {
   }
   public: {
     Tables: {
+      analytics_events: {
+        Row: {
+          created_at: string
+          event: string
+          id: string
+          path: string | null
+          role: string | null
+        }
+        Insert: {
+          created_at?: string
+          event: string
+          id?: string
+          path?: string | null
+          role?: string | null
+        }
+        Update: {
+          created_at?: string
+          event?: string
+          id?: string
+          path?: string | null
+          role?: string | null
+        }
+        Relationships: []
+      }
+      region_lookups: {
+        Row: {
+          created_at: string
+          id: string
+          ref: string | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          zip: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ref?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          zip: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ref?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          zip?: string
+        }
+        Relationships: []
+      }
       signups: {
         Row: {
-          city: string
+          city: string | null
+          company: string | null
           confirmation_sent_at: string | null
           confirmation_token: string
           confirmed_at: string | null
+          county: string | null
           created_at: string
           email: string
           full_name: string
+          grade: string | null
           id: string
-          message: string
+          interest: string | null
+          message: string | null
+          parent_confirmed: boolean
+          parent_confirmed_at: string | null
+          parent_email: string | null
+          parent_token: string | null
+          ref: string | null
+          role: string | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          zip: string | null
         }
         Insert: {
-          city: string
+          city?: string | null
+          company?: string | null
           confirmation_sent_at?: string | null
           confirmation_token?: string
           confirmed_at?: string | null
+          county?: string | null
           created_at?: string
           email: string
           full_name: string
+          grade?: string | null
           id?: string
-          message: string
+          interest?: string | null
+          message?: string | null
+          parent_confirmed?: boolean
+          parent_confirmed_at?: string | null
+          parent_email?: string | null
+          parent_token?: string | null
+          ref?: string | null
+          role?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          zip?: string | null
         }
         Update: {
-          city?: string
+          city?: string | null
+          company?: string | null
           confirmation_sent_at?: string | null
           confirmation_token?: string
           confirmed_at?: string | null
+          county?: string | null
           created_at?: string
           email?: string
           full_name?: string
+          grade?: string | null
           id?: string
-          message?: string
+          interest?: string | null
+          message?: string | null
+          parent_confirmed?: boolean
+          parent_confirmed_at?: string | null
+          parent_email?: string | null
+          parent_token?: string | null
+          ref?: string | null
+          role?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          zip?: string | null
         }
         Relationships: []
       }
