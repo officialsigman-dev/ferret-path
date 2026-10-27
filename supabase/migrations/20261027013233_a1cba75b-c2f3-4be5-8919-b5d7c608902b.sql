@@ -1,0 +1,1 @@
+ALTER TABLE public.signups ADD COLUMN industry text;

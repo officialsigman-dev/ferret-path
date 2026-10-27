@@ -81,6 +81,7 @@ export type Database = {
           full_name: string
           grade: string | null
           id: string
+          industry: string | null
           interest: string | null
           message: string | null
           parent_confirmed: boolean
@@ -106,6 +107,7 @@ export type Database = {
           full_name: string
           grade?: string | null
           id?: string
+          industry?: string | null
           interest?: string | null
           message?: string | null
           parent_confirmed?: boolean
@@ -131,6 +133,7 @@ export type Database = {
           full_name?: string
           grade?: string | null
           id?: string
+          industry?: string | null
           interest?: string | null
           message?: string | null
           parent_confirmed?: boolean
